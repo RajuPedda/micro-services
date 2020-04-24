@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+require('dotenv').config();
 
 import { SharedModule } from '../shared/shared.module';
 import { AuthController } from './auth.controller';
@@ -13,8 +14,8 @@ import { LocalStrategy } from './local.strategy';
     SharedModule,
     PassportModule.register({ defaultStrategy: ['local', 'jwt'] }),
     JwtModule.register({
-      secret: 'secretKey', // process.env.SECRET_KEY,
-      signOptions: { expiresIn: '2h' },
+      secret: process.env.SECRET_KEY,
+      signOptions: { expiresIn: '1h' },
     }),
   ],
   controllers: [AuthController],

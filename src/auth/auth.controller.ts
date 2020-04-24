@@ -1,6 +1,5 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { Logger } from '@nestjs/common';
 
 import { UserService } from '../shared/user.service';
 import { AuthService } from './auth.service';
@@ -15,7 +14,7 @@ export class AuthController {
   // @UseGuards(LocalAuthGuard)
   @MessagePattern('login')
   async login(@Payload() userDTO: any) {
-    const user = await this.userService.findByLogin(userDTO);
+    const user = await this.userService.login(userDTO);
     const payload: any = {
       username: user.username,
       seller: user.seller,
@@ -25,8 +24,7 @@ export class AuthController {
   }
 
   @MessagePattern('register')
-  async register(userDTO: any) {
-    Logger.log(userDTO.username);
+  async register(@Payload() userDTO: any) {
     const user = await this.userService.create(userDTO);
     const payload: any = {
       username: user.username,

@@ -25,16 +25,14 @@ export class UserService {
     return await this.userModel.find();
   }
 
-  async findByLogin(userDTO: any) {
+  async login(userDTO: any) {
     const { password } = userDTO;
     const user = await this.userModel
       .findOne({ username: userDTO.username })
       .select('username password seller created address');
-    console.log(`${user}`);
     if (!user) {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
-
     if (await bcrypt.compare(password, user.password)) {
       return this.sanitizeUser(user);
     } else {
@@ -42,7 +40,7 @@ export class UserService {
     }
   }
 
-  async findByPayload(payload: any) {
+  async validate(payload: any) {
     const { username } = payload;
     return await this.userModel.findOne({ username });
   }
@@ -51,6 +49,5 @@ export class UserService {
     const sanitized = user.toObject();
     delete sanitized['password'];
     return sanitized;
-    // return user.depopulate('password');
   }
 }

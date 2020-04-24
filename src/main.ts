@@ -3,14 +3,14 @@ import { AppModule } from './app.module';
 import { Transport } from '@nestjs/microservices';
 import { Logger } from '@nestjs/common';
 
-import 'dotenv/config';
+require('dotenv').config();
 
 const logger: Logger = new Logger('Main');
 const microServiceOptions = {
   transport: Transport.TCP,
   options: {
     host: '127.0.0.1',
-    port: 8877,
+    port: 2233,
   },
 };
 
@@ -20,7 +20,7 @@ async function bootstrap() {
     microServiceOptions,
   );
   await app.listen(() => {
-    logger.log(`Micro service is listening ....`);
+    logger.log(`Micro service is listening ...`);
   });
 }
 bootstrap();

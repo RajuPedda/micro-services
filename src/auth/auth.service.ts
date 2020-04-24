@@ -19,15 +19,6 @@ export class AuthService {
   }
 
   async validateUser(payload: any) {
-    return await this.userService.findByPayload(payload);
+    return await this.userService.validate(payload);
   }
-
-  /*  async validateUserLocal(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
-    }
-    return null;
-  } */
 }
