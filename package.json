@@ -29,7 +29,7 @@
     "@nestjs/passport": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
     "@types/mongoose": "^5.7.10",
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "mongoose": "^5.4.20",
     "passport": "^0.4.1",
